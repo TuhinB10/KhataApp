@@ -1,0 +1,68 @@
+.dues-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: #222;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px #0001;
+  padding: 2rem;
+  color: #fff;
+}
+.dues-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.dues-form input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #333;
+  color: #fff;
+}
+.dues-form button {
+  padding: 0.5rem 1rem;
+  background: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.dues-form button[type="button"] {
+  background: #888;
+}
+.dues-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.dues-table th, .dues-table td {
+  border: 1px solid #444;
+  padding: 0.75rem;
+  text-align: left;
+  color: #fff;
+}
+.dues-table th {
+  background: #333;
+  color: #fff;
+}
+.dues-table button {
+  margin-right: 0.5rem;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+}
+.dues-table button:last-child {
+  background: #25d366;
+}
+@media (max-width: 600px) {
+  .dues-container {
+    padding: 1rem;
+  }
+  .dues-form {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

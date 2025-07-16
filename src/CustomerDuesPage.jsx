@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import './CustomerDues.css';
 
 // Predefined product list
-const PRODUCT_LIST = [
+const DEFAULT_PRODUCT_LIST = [
   'Rice',
   'Wheat',
   'Sugar',
@@ -25,6 +25,8 @@ export default function CustomerDuesPage({ customers, dues, addDue, markDueAsPai
   const customerDues = dues[customerId] || [];
   const [form, setForm] = useState({ price: '', date: '' });
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [productList, setProductList] = useState(DEFAULT_PRODUCT_LIST);
+  const [newProduct, setNewProduct] = useState('');
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -36,6 +38,15 @@ export default function CustomerDuesPage({ customers, dues, addDue, markDueAsPai
         ? prev.filter(p => p !== product)
         : [...prev, product]
     );
+  };
+
+  const handleAddProduct = (e) => {
+    e.preventDefault();
+    const prod = newProduct.trim();
+    if (!prod || productList.includes(prod)) return;
+    setProductList(prev => [...prev, prod]);
+    setSelectedProducts(prev => [...prev, prod]);
+    setNewProduct('');
   };
 
   const handleAddDue = (e) => {
@@ -80,22 +91,33 @@ export default function CustomerDuesPage({ customers, dues, addDue, markDueAsPai
           Send Dues via WhatsApp
         </button>
       )}
-      <form onSubmit={handleAddDue} className="dues-form" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-        <div style={{ marginBottom: '1rem' }}>
-          <span style={{ fontWeight: 'bold' }}>Select Products:</span>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '0.5rem' }}>
-            {PRODUCT_LIST.map(product => (
-              <label key={product} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                <input
-                  type="checkbox"
-                  checked={selectedProducts.includes(product)}
-                  onChange={() => handleProductToggle(product)}
-                />
-                {product}
-              </label>
-            ))}
-          </div>
+      <div style={{ marginBottom: '1rem' }}>
+        <span style={{ fontWeight: 'bold' }}>Select Products:</span>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '0.5rem' }}>
+          {productList.map(product => (
+            <label key={product} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+              <input
+                type="checkbox"
+                checked={selectedProducts.includes(product)}
+                onChange={() => handleProductToggle(product)}
+              />
+              {product}
+            </label>
+          ))}
         </div>
+        <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem' }}>
+          <input
+            type="text"
+            placeholder="Add new product"
+            value={newProduct}
+            onChange={e => setNewProduct(e.target.value)}
+          />
+          <button type="button" style={{ background: '#1976d2', color: '#fff', border: 'none', borderRadius: 4, padding: '0.3rem 0.7rem', cursor: 'pointer' }} onClick={handleAddProduct}>
+            Add
+          </button>
+        </div>
+      </div>
+      <form onSubmit={handleAddDue} className="dues-form" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
         <input name="price" type="number" placeholder="Amount" value={form.price} onChange={handleChange} />
         <input name="date" type="date" value={form.date} onChange={handleChange} />
         <button type="submit">Add Due</button>

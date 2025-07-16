@@ -4,13 +4,15 @@ import './CustomerDues.css';
 
 export default function CustomerList({ customers, addCustomer }) {
   const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
   const navigate = useNavigate();
 
   const handleAddCustomer = (e) => {
     e.preventDefault();
-    if (!name.trim()) return;
-    addCustomer(name.trim());
+    if (!name.trim() || !phone.trim()) return;
+    addCustomer(name.trim(), phone.trim());
     setName('');
+    setPhone('');
   };
 
   return (
@@ -22,6 +24,11 @@ export default function CustomerList({ customers, addCustomer }) {
           placeholder="Customer Name"
           value={name}
           onChange={e => setName(e.target.value)}
+        />
+        <input
+          placeholder="Phone Number (+91...)"
+          value={phone}
+          onChange={e => setPhone(e.target.value)}
         />
         <button type="submit">Add Customer</button>
       </form>

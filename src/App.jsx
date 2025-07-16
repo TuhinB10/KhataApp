@@ -32,8 +32,8 @@ export default function App() {
     localStorage.setItem('dues', JSON.stringify(dues));
   }, [dues]);
 
-  const addCustomer = (name) => {
-    const newCustomer = { id: Date.now(), name };
+  const addCustomer = (name, phone) => {
+    const newCustomer = { id: Date.now(), name, phone };
     setCustomers(prev => [...prev, newCustomer]);
   };
 

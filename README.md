@@ -8,7 +8,7 @@ KhataApp is a Vite + React application that enables store owners to manage custo
 - Real-time updates (ready for backend integration)
 - Send WhatsApp notifications to customers
 - Modular and maintainable codebase
-
+- No Database or backend required
 ## Getting Started
 1. Install dependencies:
    ```sh
@@ -22,7 +22,6 @@ KhataApp is a Vite + React application that enables store owners to manage custo
 ## Project Structure
 - `src/` — React components and app logic
 - `public/` — Static assets
-- `.github/copilot-instructions.md` — Copilot workspace instructions
 
 ## Next Steps
 - Integrate backend (Node.js/Express + MongoDB)
